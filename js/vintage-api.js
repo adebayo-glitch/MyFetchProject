@@ -60,3 +60,13 @@ export async function updateStockTargetPrice(id, targetPrice) {
         throw error;
     }
 }
+
+
+export async function removeStockFromWatchlist(symbol) {
+    //  request to remove a stock from the watchlist using promise
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve({ success: true, message: `${symbol} removed from watchlist` });
+        }, 500);
+    });
+}
