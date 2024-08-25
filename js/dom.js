@@ -37,3 +37,8 @@ export function getWatchlistItemInformation(id) {
     };
 }
 
+export function removeWatchlist(id) {
+    const watchlistItems = document.getElementById('watchlistItems');
+    const item = watchlistItems.querySelector(`li:has(button[data-id="${id}"])`);
+    if (item) watchlistItems.removeChild(item);
+}
