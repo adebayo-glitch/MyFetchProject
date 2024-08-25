@@ -36,7 +36,18 @@ async function handleAddStockToWatchlist(event) {
     }
 }
 
-
-
 searchButton.addEventListener('click', handleStockSearch);
+
+async function handleStockSearch() {
+    const symbol = stockSymbolInput.value.trim().toUpperCase();
+    if (!symbol) return;
+    try {
+        const stockInfo = await getStockInformation(symbol);
+        displayStockInformation(stockInfo);
+    } catch (error) {
+        alert('Error fetching stock information. Please try again.');
+    }
+}
+
+
 watchlistSection.addEventListener('click', handleStockWatchlistActions);
