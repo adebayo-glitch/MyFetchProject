@@ -49,5 +49,27 @@ async function handleStockSearch() {
     }
 }
 
-
 watchlistSection.addEventListener('click', handleStockWatchlistActions);
+
+async function handleStockWatchlistActions(event) {
+    const id = event.target.dataset.id;
+    if (!id) return;
+    if (event.target.classList.contains('update-btn')) {
+        const { notes, targetPrice } = getWatchlistItemInformation(id);
+        try {
+            await updateStockInformationNotes(id, notes);
+            await updateStockTargetPrice(id, targetPrice);
+            alert(`Updated information for stock ID: ${id}`);
+        } catch (error) {
+            alert('Error updating stock information. Please try again.');
+        }
+    } else if (event.target.classList.contains('remove-btn')) {
+        try {
+            await removeStockFromWatchlist(id);
+            removeWatchlist(id);
+            alert(`Stock removed from watchlist`);
+        } catch (error) {
+            alert('Error removing stock from watchlist. Please try again.');
+        }
+    }
+}
