@@ -26,3 +26,14 @@ export function displayStockInformation(stockInfo) {
     `;
 }
 
+export function getWatchlistItemInformation(id) {
+    const item = document.querySelector(`li:has(button[data-id="${id}"])`);
+    if (!item) return null;
+    const notesInput = item.querySelector('.notes-input');
+    const targetPriceInput = item.querySelector('.target-price-input');
+    return {
+        notes: notesInput.value,
+        targetPrice: targetPriceInput.value
+    };
+}
+
