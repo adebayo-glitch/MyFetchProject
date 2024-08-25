@@ -3,14 +3,13 @@ import {
     displayStockWatchlistItem, 
     getWatchlistItemInformation, 
     removeWatchlist,
-} from './dom'
+} from './dom.js'
 import {
     addStockToWatchlist, 
     getStockInformation, 
     removeStockFromWatchlist,
-    updateStockInformationNotes, 
-    updateStockTargetPrice
-} from './vintage-api'
+    updateStockInfo,
+} from './vintage-api.js'
 
 const stockInformationSection = document.getElementById('stockInfo');
 const searchButton = document.getElementById('searchBtn');
@@ -52,14 +51,14 @@ async function handleStockSearch() {
 watchlistSection.addEventListener('click', handleStockWatchlistActions);
 
 async function handleStockWatchlistActions(event) {
-    const id = event.target.dataset.id;
+    const id = parseInt(event.target.dataset.id);
+    console.log(id)
     if (!id) return;
     if (event.target.classList.contains('update-btn')) {
-        const { notes, targetPrice } = getWatchlistItemInformation(id);
+        const { symbol, notes, targetPrice } = getWatchlistItemInformation(id);
         try {
-            await updateStockInformationNotes(id, notes);
-            await updateStockTargetPrice(id, targetPrice);
-            alert(`Updated information for stock ID: ${id}`);
+            await updateStockInfo(id, symbol, notes, targetPrice);
+            alert(`Updated information for ${symbol}`);
         } catch (error) {
             alert('Error updating stock information. Please try again.');
         }

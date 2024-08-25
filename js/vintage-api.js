@@ -1,5 +1,4 @@
-import { getNextId } from "./utils";
-
+import { getNextId } from "./utils.js";
 
 const API_KEY = 'DYU0TIW5D76590CG';
 const URL = 'https://www.alphavantage.co/query';
@@ -21,20 +20,23 @@ export async function addStockToWatchlist(symbol) {
     }
 }
 
-export async function updateStockInformationNotes(id, notes) {
+export async function updateStockInfo(id, symbol, notes, targetPrice) {
+    if (!id) {
+        throw new Error('Invalid ID');
+    }
     try {
         const response = await axios.put(`${JSON_PLACEHOLDER_URL}/posts/${id}`, {
             id: id,
-            title: 'Updated Stock',
-            body: notes,
+            title: symbol,
+            body: `Notes: ${notes}\nTarget Price: ${targetPrice}`,
             userId: 1
         });
         return { success: true, data: response.data };
     } catch (error) {
-        console.error('Error updating stock notes:', error);
-        throw error;
+        console.error('Error updating stock information:', error);
     }
 }
+
 
 export async function getStockInformation(symbol) {
     try {
@@ -47,20 +49,6 @@ export async function getStockInformation(symbol) {
    
     }
 }
-
-
-export async function updateStockTargetPrice(id, targetPrice) {
-    try {
-        const response = await axios.patch(`${JSON_PLACEHOLDER_URL}/posts/${id}`, {
-            body: `Target Price: ${targetPrice}`
-        });
-        return { success: true, data: response.data };
-    } catch (error) {
-        console.error('Error updating target price:', error);
-        throw error;
-    }
-}
-
 
 export async function removeStockFromWatchlist(symbol) {
     //  request to remove a stock from the watchlist using promise

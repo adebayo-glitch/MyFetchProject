@@ -29,9 +29,11 @@ export function displayStockInformation(stockInfo) {
 export function getWatchlistItemInformation(id) {
     const item = document.querySelector(`li:has(button[data-id="${id}"])`);
     if (!item) return null;
+    const symbol = item.querySelector('span').textContent;
     const notesInput = item.querySelector('.notes-input');
     const targetPriceInput = item.querySelector('.target-price-input');
     return {
+        symbol: symbol,
         notes: notesInput.value,
         targetPrice: targetPriceInput.value
     };
