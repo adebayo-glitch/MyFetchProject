@@ -47,3 +47,16 @@ export async function getStockInformation(symbol) {
    
     }
 }
+
+
+export async function updateStockTargetPrice(id, targetPrice) {
+    try {
+        const response = await axios.patch(`${JSON_PLACEHOLDER_URL}/posts/${id}`, {
+            body: `Target Price: ${targetPrice}`
+        });
+        return { success: true, data: response.data };
+    } catch (error) {
+        console.error('Error updating target price:', error);
+        throw error;
+    }
+}
