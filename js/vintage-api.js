@@ -21,6 +21,21 @@ export async function addStockToWatchlist(symbol) {
     }
 }
 
+export async function updateStockInformationNotes(id, notes) {
+    try {
+        const response = await axios.put(`${JSON_PLACEHOLDER_URL}/posts/${id}`, {
+            id: id,
+            title: 'Updated Stock',
+            body: notes,
+            userId: 1
+        });
+        return { success: true, data: response.data };
+    } catch (error) {
+        console.error('Error updating stock notes:', error);
+        throw error;
+    }
+}
+
 export async function getStockInformation(symbol) {
     try {
         const response = await axios.get(
