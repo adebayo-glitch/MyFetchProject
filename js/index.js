@@ -12,3 +12,7 @@ import {
     updateStockTargetPrice
 } from './vintage-api'
 
+const stockInformationSection = document.getElementById('stockInfo');
+const searchButton = document.getElementById('searchBtn');
+const watchlistSection = document.getElementById('watchlist');
+const stockSymbolInput = document.getElementById('stockSymbol');
