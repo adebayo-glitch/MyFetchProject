@@ -52,13 +52,12 @@ watchlistSection.addEventListener('click', handleStockWatchlistActions);
 
 async function handleStockWatchlistActions(event) {
     const id = parseInt(event.target.dataset.id);
-    console.log(id)
     if (!id) return;
     if (event.target.classList.contains('update-btn')) {
         const { symbol, notes, targetPrice } = getWatchlistItemInformation(id);
         try {
             await updateStockInfo(id, symbol, notes, targetPrice);
-            alert(`Updated information for ${symbol}`);
+            alert(`${symbol} stock Updated Successfully`);
         } catch (error) {
             alert('Error updating stock information. Please try again.');
         }
